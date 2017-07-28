@@ -16,24 +16,19 @@ Route::get('/', function () {
 });
 
 Route::get('/about',function() {
-	return '<h1>Hallo</h1>'
-	.'Selamat datang di web saya <br>'
-	.'laravel emang keren.';
-});
-
-Route::get('latihan',function() {
 	return view('about');
 });
 
-Route::get('/about/1',function() {
+
+Route::get('/about1/1',function() {
 	return view ('about.satu');
 });
 
-Route::get('/about/2',function() {
+Route::get('/about2/2',function() {
 	return view ('about.dua');
 });
 
-Route::get('/about/3',function() {
+Route::get('/abou3/3',function() {
 	return view ('about.tiga');
 });
 
@@ -45,9 +40,46 @@ Route::get('/siswa/{nama}/{sekolah}/{umur}',function($a,$b,$c) {
 });
 
 
-Route::get('{nama}',function() {
+Route::get('nama/{nama}',function() {
 
 	$a='john';
 	return 'ini halaman about '. $a; 
 });
+
+Route::get('testmodel',function() {
+	$b=App\Post::all();
+	return $b;
+});
+
+Route::get('id', function (){
+	$d=App\Post::find(1);
+	return $d;
+
+});
+
+Route::get('model',function (){
+      $c =App\Post::where('title','like','cepat nikah')->get();
+      return $c;
+});
+
+Route::get('ubah',function(){
+	$post = App\Post::find(1);
+	$post->title ="ciri keluarga sakinah";
+	$post->save();
+	return $post;
+});
+
+Route::get('model2',function(){
+	$post = new App\Post;
+	$post->title ="Amalan pembuka jodoh";
+	$post->content="solat malam,puasa sunah,silaturahmi,senyum,doa,tobat";
+	$post->save();
+	return $post;
+});
+
+Route::get('cektampilan',function() {
+	return view('layouts.master');
+});
+
+
 
