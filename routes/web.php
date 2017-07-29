@@ -81,5 +81,30 @@ Route::get('cektampilan',function() {
 	return view('layouts.master');
 });
 
+Route::get('/orangtua',function(){
+	$ortu = App\orangtua::all();
+	foreach ($ortu as $key) {
+		echo $key->nama_ayah;
+		echo " dengan ";
+		echo $key->nama_ibu;
+		echo " mempunyai anak ";
+		foreach ($key->siswa as $data) {
+			echo "<li>".$data->nama."</li>";
+			echo " umur ";
+			echo $data->umur;
+			echo " jenis kelamin ";
+			echo $data->jk;
+			echo " alamat ";
+			echo $data->alamat;
+		    echo "<hr>";
+		}
+	}
+});
+
+Route::get('/coba','mycontroller@index');
+Route::get('/coba2','mycontroller@tampilanmodel');
+Route::get('/coba3','mycontroller@tampilanview');
+Route::get('/coba4','mycontroller@percobaan');
+
 
 
