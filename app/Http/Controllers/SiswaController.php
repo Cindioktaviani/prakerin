@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\siswa;
 use App\orangtua;
-class OrangtuaController extends Controller
+
+class SiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,8 @@ class OrangtuaController extends Controller
     public function index()
     {
         //
-        $ortu = Orangtua::with('siswa')->get();
-        return view('orangtua.index',compact('ortu'));
+        $siswa = siswa::all();
+        return view('siswa.index',compact('siswa'));
     }
 
     /**
@@ -26,7 +29,8 @@ class OrangtuaController extends Controller
     public function create()
     {
         //
-        return view('orangtua.create');
+        $ortu = orangtua::all();
+         return view('siswa.create',compact('ortu'));
     }
 
     /**
@@ -38,14 +42,14 @@ class OrangtuaController extends Controller
     public function store(Request $request)
     {
         //
-        $ortu = new orangtua;
-        $ortu->nama_ayah = $request->a;
-        $ortu->nama_ibu = $request->b;
-        $ortu->umur_ayah = $request->c;
-        $ortu->umur_ibu = $request->d;
-        $ortu->alamat = $request->e;
-        $ortu->save();
-        return redirect('orangtua');
+        $siswa = new siswa;
+        $siswa->nama = $request->a;
+        $siswa->orangtua_id = $request->b;
+        $siswa->umur = $request->c;
+        $siswa->jk = $request->d;
+        $siswa->alamat = $request->e;
+        $siswa->save();
+        return redirect('siswa');
 
     }
 
@@ -58,8 +62,8 @@ class OrangtuaController extends Controller
     public function show($id)
     {
         //
-          $ortu = orangtua::findOrfail($id);
-        return view ('orangtua.show',compact('ortu'));
+          $siswa = siswa::findOrfail($id);
+        return view ('siswa.show',compact('siswa'));
     }
 
     /**
@@ -71,8 +75,10 @@ class OrangtuaController extends Controller
     public function edit($id)
     {
         //
-        $ortu = orangtua::findOrfail($id);
-        return view ('orangtua.edit',compact('ortu'));
+        $ortu = orangtua::all();
+        $siswa = siswa::findOrfail($id);
+        return view ('siswa.edit',compact('siswa','ortu'));
+
     }
 
     /**
@@ -85,15 +91,14 @@ class OrangtuaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $ortu = orangtua::findOrfail($id);
-         $ortu->nama_ayah = $request->a;
-        $ortu->nama_ibu = $request->b;
-        $ortu->umur_ayah = $request->c;
-        $ortu->umur_ibu = $request->d;
-        $ortu->alamat = $request->e;
-        $ortu->save();
-        return redirect('orangtua');
-
+        $siswa = siswa::findOrfail($id);
+        $siswa->nama = $request->a;
+        $siswa->orangtua_id = $request->b;
+        $siswa->umur = $request->c;
+        $siswa->jk = $request->d;
+        $siswa->alamat = $request->e;
+        $siswa->save();
+        return redirect('siswa');
 
     }
 
@@ -106,8 +111,8 @@ class OrangtuaController extends Controller
     public function destroy($id)
     {
         //
-        $ortu = orangtua::findOrfail($id);
-        $ortu->delete();
-        return redirect('orangtua');
+         $siswa = siswa::findOrfail($id);
+        $siswa->delete();
+        return redirect('siswa');
     }
 }
